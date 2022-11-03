@@ -1,0 +1,532 @@
+{% extends "base/base.html" %}
+
+{% block container %}
+<div class="container">
+    <div class="col-md-12 col-sm-12">
+        <div class="card card-custom">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-icon">
+                        <span class="svg-icon svg-icon-primary svg-icon-2x">
+                           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"/>
+                                <path d="M13.5,21 L13.5,18 C13.5,17.4477153 13.0522847,17 12.5,17 L11.5,17 C10.9477153,17 10.5,17.4477153 10.5,18 L10.5,21 L5,21 L5,4 C5,2.8954305 5.8954305,2 7,2 L17,2 C18.1045695,2 19,2.8954305 19,4 L19,21 L13.5,21 Z M9,4 C8.44771525,4 8,4.44771525 8,5 L8,6 C8,6.55228475 8.44771525,7 9,7 L10,7 C10.5522847,7 11,6.55228475 11,6 L11,5 C11,4.44771525 10.5522847,4 10,4 L9,4 Z M14,4 C13.4477153,4 13,4.44771525 13,5 L13,6 C13,6.55228475 13.4477153,7 14,7 L15,7 C15.5522847,7 16,6.55228475 16,6 L16,5 C16,4.44771525 15.5522847,4 15,4 L14,4 Z M9,8 C8.44771525,8 8,8.44771525 8,9 L8,10 C8,10.5522847 8.44771525,11 9,11 L10,11 C10.5522847,11 11,10.5522847 11,10 L11,9 C11,8.44771525 10.5522847,8 10,8 L9,8 Z M9,12 C8.44771525,12 8,12.4477153 8,13 L8,14 C8,14.5522847 8.44771525,15 9,15 L10,15 C10.5522847,15 11,14.5522847 11,14 L11,13 C11,12.4477153 10.5522847,12 10,12 L9,12 Z M14,12 C13.4477153,12 13,12.4477153 13,13 L13,14 C13,14.5522847 13.4477153,15 14,15 L15,15 C15.5522847,15 16,14.5522847 16,14 L16,13 C16,12.4477153 15.5522847,12 15,12 L14,12 Z" fill="#000000"/>
+                                <rect fill="#FFFFFF" x="13" y="8" width="3" height="3" rx="1"/>
+                                <path d="M4,21 L20,21 C20.5522847,21 21,21.4477153 21,22 L21,22.4 C21,22.7313708 20.7313708,23 20.4,23 L3.6,23 C3.26862915,23 3,22.7313708 3,22.4 L3,22 C3,21.4477153 3.44771525,21 4,21 Z" fill="#000000" opacity="0.3"/>
+                            </g>
+                            </svg>
+                        </span>
+                    </span>
+                    <h3 class="card-label">Cadastrar {{singular_name}} </h3>
+                </div>
+                <div class="card-toolbar">
+                    <!--begin::Button-->
+                    <a href="../../../../../{{controller|lower}}" class="mr-2 btn btn-success font-weight-bolder">
+                        <i class="far fa-list-alt"></i>Listar {{singular_name}} 
+                    </a>
+                    <a onclick="modalPropietario()" class="btn btn-dark"  data-toggle="modal" data-target="#modalPropietario">
+                        Cadastrar Proprietário
+                    </a>
+                </div>
+            </div>
+            <!-- FORM CADASTRO DE IMÓVEIS -->
+            <form class="form" id="add" method="post" action="../../../../../api/imoveis/add">
+            <input type="hidden" id="imoveis_id">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Codigo do Imovel:</label>
+                                <input  type="number" class="form-control form-control-solid form-control-lg" name="codigo" id="codigo" value="" required />
+                            </div>
+                        </div>   
+                        <div class="col-md-3">
+                            <label>Proprietário</label>
+                            <select  class="form-control form-control-solid form-control-lg" id="proprietarios" name="proprietarios_id" ></select>
+                            
+                        </div>
+                        <div class="col-md-3">
+                            <label>Selecione um Responsável</label>
+                            <select class="form-control form-control-solid form-control-lg" id="valorDatatables" name="responsavel" required> 
+                                <option value="Mauricio"> Mauricio </option>
+                                <option value="Rogerio"> Rogerio </option>
+                                <option value="Henrique"> Henrique</option>
+                            </select>
+                        </div>    
+                        
+                        <div class="col-md-3">
+                            <label>Opções de Vendas</label>
+                            <select class="form-control form-control-solid form-control-lg" id="tipo_venda" name="tipo_venda" required> 
+                                <option value="ambos"> Ambos </option>
+                                <option value="aluguel"> Aluguel </option>
+                                <option value="venda"> Venda</option>
+                            </select>
+                        </div> 
+                    </div>     
+
+                    <div class="row mt-3">
+                        <div class="form-group col-md-2">
+                            <label class="">Cep:</label>
+                            <input class="form-control form-control-solid form-control-lg  cep" type="text" id="cep"  name="cep" onchange="cepSearch()" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Bairro:</label>
+                            <input  type="text" class="form-control form-control-solid form-control-lg" name="bairro" id="bairro" value="" required/>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label> Endereço:</label>
+                            <input  type="text" class="form-control form-control-solid form-control-lg" name="endereco" id="endereco" value="" required/>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label> Numero:</label>
+                            <input  type="number" class="form-control form-control-solid form-control-lg" name="numero" id="numero" value="" required/>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label> Complemento:</label>
+                            <input  type="text" class="form-control form-control-solid form-control-lg" name="complemento" id="complemento" value="" />
+                        </div>
+                    
+                       
+                        <div class="form-group col-md-4">
+                            <label class="">Cidade:</label>
+                            <input class="form-control form-control-solid form-control-lg " type="text" id="cidade"  name="cidade" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="">UF:</label>
+                            <select class="form-control form-control-solid form-control-lg" placeholder="Selecione" name="estado" id="estado" required>
+                              <option value=""></option>
+                              <option value="AC">AC</option>
+                              <option value="AL">AL</option>
+                              <option value="AP">AP</option>
+                              <option value="AM">AM</option>
+                              <option value="BA">BA</option>
+                              <option value="CE">CE</option>
+                              <option value="DF">DF</option>
+                              <option value="ES">ES</option>
+                              <option value="GO">GO</option>
+                              <option value="MA">MA</option>
+                              <option value="MT">MT</option>
+                              <option value="MS">MS</option>
+                              <option value="MG">MG</option>
+                              <option value="PA">PA</option>
+                              <option value="PB">PB</option>
+                              <option value="PR">PR</option>
+                              <option value="PE">PE</option>
+                              <option value="PI">PI</option>
+                              <option value="RJ">RJ</option>
+                              <option value="RN">RN</option>
+                              <option value="RS">RS</option>
+                              <option value="RO">RO</option>
+                              <option value="RR">RR</option>
+                              <option value="SC">SC</option>
+                              <option value="SP">SP</option>
+                              <option value="SE">SE</option>
+                              <option value="TO">TO</option>
+                              <option value="EX">Estrangeiro</option>
+                            </select>
+                        </div>                       
+                    </div>
+
+                    <div class="row mt-3 mb-4">
+                            <div class="col-3">
+                                <label class="">Tipo de Imóvel:</label>
+                              <select  class="form-control" placeholder="Selecione" name="tipo">
+                                <option  selected disabled>Selecione</option>
+                                <optgroup label="Residencial">
+                                  <option value="apartamento">Apartamento</option>
+                                  <option value="flat">Flat, Loft, Studio ou Kitnet</option>
+                                  <option value="casa">Casa</option>
+                                  <option value="cobertura">Cobertura</option>
+                                  <option value="lote">Lote Residencial</option>
+                                  <option value="terreno">Terreno</option>
+                                  <option value="ilha">Ilha</option>
+                                  <option value="sitio">Sitio, Chacara ou Fazenda</option>
+                                </optgroup>
+                                <optgroup label="Comercial">
+                                  <option value="Sala Comercial">Sala Comercial</option>
+                                  <option value="Sala Corporativa">Sala Corporativa</option>
+                                  <option value="Loja">Loja</option>
+                                  <option value="Prédio">Prédio</option>
+                                  <option value="Casa Comercial">Casa Comercial</option>
+                                  <option value="Lote Comercial">Lote Comercial</option>
+                                  <option value="Hotel">Hotel, Pousada</option>
+                                  <option value="Suite">Suíte Hotelaria</option>
+                                  <option value="Galpao">Galpão, Armazém</option>
+                                  <option value="Imóveis Rurais">Imóveis Rurais</option>
+                                  <option value="Imóveis Industriais">Imóveis Industriais</option>
+                                </optgroup>                                        
+                              </select>
+                            </div>
+                          
+                       
+                             
+                        <div class="col-md-3">
+                            <label>Preço de Locação</label>
+                            <input class="form-control form-control-solid money form-control-lg " type="text" id="locacao"  name="locacao"required>
+                        </div> 
+                        <div class="col-md-3">
+                            <label>Preço de Condomínio</label>
+                            <input class="form-control form-control-solid money form-control-lg " type="text" id="condominio"  name="condominio"   required>
+                        </div>   
+                        <div class="col-md-3">
+                            <label>Preço de Venda</label>
+                            <input class="form-control form-control-solid money form-control-lg " type="text" id="preco_venda"  name="preco_venda"required>
+                        </div> 
+                        <div class="col-md-6">
+                            <label>Área Util:</label>
+                            <input class="form-control form-control-solid form-control-lg " type="number" id="area_util"  name="area_util"required>
+                        </div> 
+                        <div class="col-md-6">
+                            <label>Área Total:</label>
+                            <input class="form-control form-control-solid form-control-lg " type="number" id="area_total"  name="area_total"required>
+                        </div>  
+                        
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="checkbox checkbox-lg">
+                                <input type="checkbox" name="condominio_responsabilidade"   value="1"/>
+                                <span class="mr-1"></span>
+                                  O Condomínio não será responsabilidade da  Imobiliária.
+                            </label>
+                        </div>   
+                    </div>
+                 
+                    <hr>                
+                    <div class="row">  
+                        <div class="col-md-6" style="border-style: ridge; padding: 20px">
+                            <h4>IPTU</h4>
+                            <div class="d-flex"> 
+                                <!-- <div>
+                                    <label> Isento ou o locatário paga direto: </label>
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="isento"  id='isento' value="1">
+                                        <span> </span> 
+                                    </label>
+                                </div>                                -->
+                               
+                                <div >
+                                    <label>Cobrar Comissão no <b>IPTU?</b></label>
+                                    <span class="switch">
+                                        <label>
+                                            <input type="checkbox"  {% if taxa_iptu == '1'%} checked {%endif%}  name="taxa_iptu"  value="1"/>
+                                            <span></span>
+                                        </label>
+                                    </span>                                                         
+                                </div>
+                            </div>
+                         
+                            <div class="mt-3">
+                                <label>Opções de IPTU</label>
+                                <select class="form-control form-control-solid form-control-lg "  id="opcoes_iptu"  name="opcoes_iptu" >
+                                    <option value="1">A Imobiliária não é responsável</option>
+                                    <option value="2">A Imobiliária é responsável</option>
+                                </select>
+                            </div>
+
+                            <div class="mt-3">
+                                <label>Preço da parcela do IPTU:</label>
+                                <input class="form-control form-control-solid money form-control-lg " type="text" id="iptu"  name="iptu" >
+                            </div>
+                            
+
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <label>Parcela Atual:</label>
+                                    <input class="form-control form-control-solid  form-control-lg " type="number" id="parcela_atual"  name="parcela_atual_iptu" >
+                                </div>
+                              
+                                <div class="col-6">
+                                    <label>QTD Parcelas:</label>
+                                    <input class="form-control form-control-solid form-control-lg " type="number" id="iptu"  name="qtd_parcelas_iptu">
+                                </div>
+                            </div>
+                            
+                        </div>
+                      <div class="col-md-6" style="border-style: ridge; padding: 20px">
+                        <h4>Seguro Incêndio</h4>
+                        <br>
+                        <div>                               
+                            <select class="form-control form-control-solid form-control-lg" name="tipo_residencial"> 
+                                <option value="imobiliaria">Imobiliária</option>
+                                <option value="inquilino">Locatário</option>
+                            </select>
+                        </div>    
+                        <br>
+                        <div class="">
+                            <label>Valor Assegurado:</label>
+                            <input class="form-control form-control-solid money form-control-lg " type="text" id=""  name="seg_incendio_valor">
+                        </div>
+                        <br>
+                        <div class="">
+                            <label>Valor a Pagar:</label>
+                            <input class="form-control form-control-solid money form-control-lg " type="text"  name="seg_incendio_valor_total">
+                        </div>
+                      </div>
+                    </div>
+
+                    <br>
+                    <hr>
+                    <br>
+
+                    <div class="row">
+                        
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Fotos do Imóvel:</label>
+                                <div id="dropzone" class="dropzone">
+                                </div>
+                            </div>
+                        </div>
+    
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Video do Imóvel (link do embed do youtube)</label>
+                           <input type='text' class="form-control form-control-solid form-control-lg" name="youtube_url">
+                        </div>
+                    </div>
+
+                    <br>
+                    <hr>
+                    <br>
+                    
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <label>Descrição do Imóvel </label>
+                           <textarea class="form-control form-control-solid form-control-lg" name="observacao"></textarea>
+                        </div>                                             
+                    </div>
+                    <hr>
+                    {%if features|length > 0%}
+                    <h4>Mais daods</h4>
+                    <div id="accordion">
+                        <div class="card">
+                          <div class="" id="headingOne">
+                            <h5 class="mb-0">
+                              <button type='button' class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Aperte aqui 
+                              </button>
+                            </h5>
+                          </div>
+                      
+                          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12 col-lg-6">
+                                        <label>Titulo do Imóvel</label>
+                                        <input type="text" class="form-control" name="title_zap">
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <label>ID do Imóvel</label>
+                                        <input type="text" class="form-control" name="zap_id">
+                                    </div>
+                                   
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-lg-4">
+                                        <label>Quantidade de Suites</label>
+                                        <input type="number" class="form-control"  name="suites_qtd" value="0">
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <label>Quantidade de Quartos</label>
+                                        <input type="number" class="form-control"   name="quartos_qtd" value="0">
+                                    </div>
+                                     <div class="col-12 col-lg-4">
+                                        <label>Quantidade de Banheiros</label>
+                                        <input type="number" class="form-control"   name="banheiros_qtd" value="0"> 
+                                    </div>
+                                </div>
+                                <div class="row">                                                           
+                                    <div class="col-12 col-lg-4">
+                                        <label>Quantidade de Garagens</label>
+                                        <input type="number" class="form-control"   name="garagens_qtd" value="0">
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <label>Numero de andares da torre</label>
+                                        <input type="number" class="form-control"   name="andares_qtd" value="0">
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <label>Numero de Torres</label>
+                                        <input type="number" class="form-control"   name="torre_qtd" value="0">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 class="text-center mt-4"> Opções de Lazeres </h6>
+                                    </div>
+                                    {%for feature in features%}                                
+                                    <div class="col-12 col-lg-4">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" name='feature[{{feature.zap_features_id}}]' value="{{feature.value}}">
+                                            <label class="form-check-label" for="inlineCheckbox1">{{feature.title}}</label>
+                                          </div>   
+                                    </div>                                   
+                                    {%endfor%}   
+                                </div>                                                  
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    {%endif%}
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        
+                        <div class="col-12" style="text-align: center;">
+                            <button type="submit" class="btn btn-success">Salvar Imóvel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal-->
+<div class="modal fade" id="modalPropietario" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cadastro de Propietário</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <!-- FORM CADASTRO DE PROPIETARIOS -->
+            <form class="form" id="addModal" method="post" action="../../../../../api/proprietarios/add">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label> Dia do depósito:</label>
+                                <select type="number" class="form-control form-control-solid form-control-lg" name="dia_deposito" id="dia_deposito">
+                                    <option  value="01">01</option>
+                                    <option  value="05">05</option>
+                                    <option  value="10">10</option>
+                                    <option  value="15">15</option>
+                                    <option  value="20">20</option>
+                                    <option  value="25">25</option>
+                                </select>                          
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Nome Completo:</label>
+                                    <input  required type="text" class="form-control form-control-solid form-control-lg" name="nome_completo" id="nome_completo" value="" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>CPF:</label>
+                                    <input required type="text" class="cpf form-control form-control-solid form-control-lg" name="cpf" id="cpf" value="" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Taxa de administração:</label>
+                                    <input  required type="text" class="form-control form-control-solid form-control-lg" name="taxa" id="taxa" value="" />
+                                </div>
+                            </div>
+                        </div> 
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label> Endereço:</label>
+                                    <input  type="text" class="form-control form-control-solid form-control-lg" name="endereco" id="endereco" value="" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Bairro:</label>
+                                    <input  type="text" class="form-control form-control-solid form-control-lg" name="bairro" id="bairro" value="" />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="">Cidade:</label>
+                                <input class="form-control form-control-solid form-control-lg " type="text" id="cidade"  name="cidade">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="">UF:</label>
+                                <select id="uf" class="form-control form-control-solid form-control-lg" placeholder="Selecione" name="estado">
+                                <option value=""></option>
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AP">AP</option>
+                                <option value="AM">AM</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MT">MT</option>
+                                <option value="MS">MS</option>
+                                <option value="MG">MG</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PR">PR</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN">RN</option>
+                                <option value="RS">RS</option>
+                                <option value="RO">RO</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SP">SP</option>
+                                <option value="SE">SE</option>
+                                <option value="TO">TO</option>
+                                <option value="EX">Estrangeiro</option>
+                                </select>
+                            </div>                       
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Dados de Contato</h4><br>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Telefone de Contato:</label>
+                                    <input  type="tel" class="telefone form-control form-control-solid form-control-lg" name="tel" id="tel" value="" />
+                                </div>
+                            </div> 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>E-mail:</label>
+                                    <input required  type="email" class="form-control form-control-solid form-control-lg" name="email" id="email" value="" />
+                                </div>
+                            </div>                        
+                        </div>
+                                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Fechar</button>
+                    <button  class="btn btn-primary font-weight-bold">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js_config %}
+<script src="assets/js/pages/custom/{{controller|lower}}/main.js"></script>
+<script src="assets/js/pages/custom/{{controller|lower}}/add.js"></script>
+<script src="assets/js/pages/custom/{{controller|lower}}/addModal.js"></script>
+<script src="assets/js/pages/custom/{{controller|lower}}/upload_picture.js"></script>
+<script src="assets/js/pages/custom/maskmoney/jquery.maskMoney.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+    <!--- Maked input JS-->
+<script>
+$(".money").maskMoney({allowNegative: false, thousands:'.', decimal:',', affixesStay: false}); 
+$(".cep").mask("99999-999");
+</script>
+
+{% endblock %}

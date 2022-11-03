@@ -1,0 +1,119 @@
+{% extends "base/base.html" %}
+
+{% block container %}
+
+<div class="container">
+    <div class="col-md-12 col-sm-12">
+        <div class="card card-custom">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-icon">
+                    <span class="svg-icon svg-icon-success svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Communication\Clipboard-list.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"/>
+                                <path d="M13.5,21 L13.5,18 C13.5,17.4477153 13.0522847,17 12.5,17 L11.5,17 C10.9477153,17 10.5,17.4477153 10.5,18 L10.5,21 L5,21 L5,4 C5,2.8954305 5.8954305,2 7,2 L17,2 C18.1045695,2 19,2.8954305 19,4 L19,21 L13.5,21 Z M9,4 C8.44771525,4 8,4.44771525 8,5 L8,6 C8,6.55228475 8.44771525,7 9,7 L10,7 C10.5522847,7 11,6.55228475 11,6 L11,5 C11,4.44771525 10.5522847,4 10,4 L9,4 Z M14,4 C13.4477153,4 13,4.44771525 13,5 L13,6 C13,6.55228475 13.4477153,7 14,7 L15,7 C15.5522847,7 16,6.55228475 16,6 L16,5 C16,4.44771525 15.5522847,4 15,4 L14,4 Z M9,8 C8.44771525,8 8,8.44771525 8,9 L8,10 C8,10.5522847 8.44771525,11 9,11 L10,11 C10.5522847,11 11,10.5522847 11,10 L11,9 C11,8.44771525 10.5522847,8 10,8 L9,8 Z M9,12 C8.44771525,12 8,12.4477153 8,13 L8,14 C8,14.5522847 8.44771525,15 9,15 L10,15 C10.5522847,15 11,14.5522847 11,14 L11,13 C11,12.4477153 10.5522847,12 10,12 L9,12 Z M14,12 C13.4477153,12 13,12.4477153 13,13 L13,14 C13,14.5522847 13.4477153,15 14,15 L15,15 C15.5522847,15 16,14.5522847 16,14 L16,13 C16,12.4477153 15.5522847,12 15,12 L14,12 Z" fill="#000000"/>
+                                <rect fill="#FFFFFF" x="13" y="8" width="3" height="3" rx="1"/>
+                                <path d="M4,21 L20,21 C20.5522847,21 21,21.4477153 21,22 L21,22.4 C21,22.7313708 20.7313708,23 20.4,23 L3.6,23 C3.26862915,23 3,22.7313708 3,22.4 L3,22 C3,21.4477153 3.44771525,21 4,21 Z" fill="#000000" opacity="0.3"/>
+                            </g>
+                        </svg><!--end::Svg Icon--></span>
+                    </span>
+                    <h3 class="card-label"> Lista de Imóveis Cadastrados</h3>
+                </div>
+                <div class="card-toolbar">
+                    <!--begin::Button-->
+                    <a href="../../../../../{{controller|lower}}/novo" class="mr-2 btn btn-success font-weight-bolder">
+                    <i class="la la-plus"></i>Adicionar novo Imóvel</a>
+                    <!--end::Button-->
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="form">
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                            <label>Busca Rapida:</label>
+                            <input type="text" id="busca_rapida" name="busca_rapida" class="serch_input form-control form-control-solid form-control-md" placeholder="Digite aqui .." />
+                        </div> 
+                        <div class="col-md-2">
+                            <label>Proprietario:</label>
+                            <input type="text" id="proprietario"  class="serch_input form-control form-control-solid form-control-md" placeholder="Proprietário da Silva" />
+                        </div>    
+                        <div class="col-md-3">
+                            <label>Endereço:</label>
+                            <input type="text" id="endereco"  class="serch_input form-control form-control-solid form-control-md" placeholder="Rua do Imóvel" />
+                        </div> 
+                        <div class="col-md-3">
+                            <label class="">Tipo de Imóvel:</label>
+                          <select  class="form-control" placeholder="Selecione" id="tipo" onchange="searchQueryDt()">
+                            <option  value="">Selecione</option>
+                            <optgroup label="Residencial">
+                              <option value="apartamento">Apartamento</option>
+                              <option value="flat">Flat, Loft, Studio ou Kitnet</option>
+                              <option value="casa">Casa</option>
+                              <option value="cobertura">Cobertura</option>
+                              <option value="lote">Lote Residencial</option>
+                              <option value="terreno">Terreno</option>
+                              <option value="ilha">Ilha</option>
+                              <option value="sitio">Sitio, Chacara ou Fazenda</option>
+                            </optgroup>
+                            <optgroup label="Comercial">
+                              <option value="Sala Comercial">Sala Comercial</option>
+                              <option value="Sala Corporativa">Sala Corporativa</option>
+                              <option value="Loja">Loja</option>
+                              <option value="Prédio">Prédio</option>
+                              <option value="Casa Comercial">Casa Comercial</option>
+                              <option value="Lote Comercial">Lote Comercial</option>
+                              <option value="Hotel">Hotel, Pousada</option>
+                              <option value="Suite">Suíte Hotelaria</option>
+                              <option value="Galpao">Galpão, Armazém</option>
+                              <option value="Imóveis Rurais">Imóveis Rurais</option>
+                              <option value="Imóveis Industriais">Imóveis Industriais</option>
+                            </optgroup>                                        
+                          </select>
+                        </div> 
+                       
+                        <div class="col-md-2 d-flex">                                    
+                            <button id="search_dt" onclick="searchQueryDt()" class="form-control btn btn-success mt-auto"><i class="flaticon2-search-1"></i></button>
+                        </div> 
+                       
+                    </div>                  
+                </div>
+                <!--begin: Datatable-->
+                <table class="table table-bordered table-hover table-checkable" id="kt_datatable" style="margin-top: 13px !important">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Endereço</th> 
+                            <th>Proprietário</th>    
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <!--end: Datatable-->
+            </div>
+        </div>
+        <!--end::Card-->
+    </div>
+</div>
+{% endblock %}
+{% block link_stylesheet %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css">
+{% endblock %}
+{% block extra_js_config %}
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="assets/plugins/custom/datatables/datatables.bundle.js?v=7.0.5"></script>
+    <!--end::Page Vendors-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
+    <!--end::Page Scripts-->
+    <script src="assets/js/pages/custom/{{controller|lower}}/main.js"></script>
+    <script src="assets/js/pages/custom/{{controller|lower}}/list.js"></script>
+{% endblock %}

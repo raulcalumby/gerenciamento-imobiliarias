@@ -1,0 +1,136 @@
+{% extends "base/base.html" %}
+
+{% block container %}
+
+<div class="container">
+    <div class="col-md-12 col-sm-12">
+        <div class="card card-custom">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-icon">
+                    <span class="svg-icon svg-icon-success svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Communication\Clipboard-list.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <polygon points="0 0 24 0 24 24 0 24"/>
+                                <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                <path d="M11,14 L9,14 C8.44771525,14 8,13.5522847 8,13 C8,12.4477153 8.44771525,12 9,12 L11,12 L11,10 C11,9.44771525 11.4477153,9 12,9 C12.5522847,9 13,9.44771525 13,10 L13,12 L15,12 C15.5522847,12 16,12.4477153 16,13 C16,13.5522847 15.5522847,14 15,14 L13,14 L13,16 C13,16.5522847 12.5522847,17 12,17 C11.4477153,17 11,16.5522847 11,16 L11,14 Z" fill="#000000"/>
+                            </g>
+                        </svg><!--end::Svg Icon--></span>
+                    </span>
+                    <h3 class="card-label"> Cadastro de Índices</h3>
+                </div>
+                <div class="card-toolbar">
+                    <!--begin::Button-->
+                    <a href="../../../../../{{controller|lower}}/novo" class="mr-2 btn btn-success font-weight-bolder">
+                    <i class="la la-plus"></i>Adicionar novo Índice</a>
+                    <!--end::Button-->
+                </div>
+            </div>
+
+            <!--begin: Datatable IPCA -->
+            <div class="card-body">
+                <div class="form"> 
+                    <div class="card-title">
+                        <h4>IPCA</h4>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                            <label>Filtro por Data:</label>
+                            <input type="month" id="filter_data" name="filter_data" class="serch_input form-control form-control-solid form-control-md" placeholder="" onchange="searchQueryDt()"/>
+                        </div>                        
+                
+                    </div>                  
+                </div>
+                <table class="table table-bordered table-hover table-checkable" id="kt_datatable_1" style="margin-top: 13px !important">
+                    <thead>
+                        <tr>
+                            <th>Aliquota</th>
+                            <th>Data</th>        
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <!--end: Datatable-->
+            </div>
+            <hr>
+            <!--begin: Datatable  // INPC-->
+            <div class="card-body">
+                <div class="form">
+                    <div class="card-title">
+                        <h4>INPC</h4>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                            <label>Filtro por Data:</label>
+                            <input type="month" id="busca_rapida_INPC" name="busca_rapida" class="serch_input form-control form-control-solid form-control-md" placeholder="" onchange="searchQueryDtINPC()"/>
+                        </div>                        
+                      
+                    </div>                  
+                </div>
+               
+                <table class="table table-bordered table-hover table-checkable" id="kt_datatable_2" style="margin-top: 13px !important">
+                    <thead>
+                        <tr>
+                            <th>Aliquota</th>
+                            <th>Data</th>        
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <!--end: Datatable-->
+            </div>
+            <hr>
+            <!--begin: Datatable  // IGPM -->
+            <div class="card-body">
+                <div class="form">
+                    <div class="card-title">
+                        <h4>IGPM</h4>
+                    </div>
+                    <div class="form-group row">                     
+                        <div class="col-md-2">
+                            <label>Filtro por Data:</label>
+                            <input type="month" id="busca_rapida_IGPM" name="busca_rapida" class="serch_input form-control form-control-solid form-control-md" placeholder="" onchange="searchQueryDtIGPM()"/>
+                        </div>                         
+                    </div>                  
+                </div>             
+                <table class="table table-bordered table-hover table-checkable" id="kt_datatable_3" style="margin-top: 13px !important">
+                    <thead>
+                        <tr>
+                            <th>Aliquota</th>
+                            <th>Data</th>        
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <!--end: Datatable-->
+            </div>
+        </div>
+        <!--end::Card-->
+    </div>
+</div>
+{% endblock %}
+{% block link_stylesheet %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css">
+{% endblock %}
+{% block extra_js_config %}
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="assets/plugins/custom/datatables/datatables.bundle.js?v=7.0.5"></script>
+    <!--end::Page Vendors-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
+    <!--end::Page Scripts-->
+    <script src="assets/js/pages/custom/{{controller|lower}}/main.js"></script>
+    <script src="assets/js/pages/custom/{{controller|lower}}/listIPCA.js"></script>
+    <script src="assets/js/pages/custom/{{controller|lower}}/listINPC.js"></script>
+    <script src="assets/js/pages/custom/{{controller|lower}}/listIGPM.js"></script>
+    
+{% endblock %}

@@ -1,0 +1,111 @@
+<div class="row">
+	<div class="col-xl-2">
+		<div class="form-group">
+			<label>CEP</label>
+			<input required type="text" class="form-control form-control-solid form-control-lg" value="{{cep}}" name="cep" id="cep" onkeyup="cepSearch()" placeholder="" />
+		</div>
+	</div>    
+	<div class="col-xl-6">
+		<div class="form-group">
+			<label>Rua/Av/Trav</label>
+			<input required type="text" class="form-control form-control-solid form-control-lg" value="{{endereco}}" name="endereco" id="endereco" placeholder="" />
+		</div>
+	</div>
+
+	<div class="col-xl-2">
+		<div class="form-group">
+			<label>Número</label>
+			<input required type="text" class="form-control form-control-solid form-control-lg" value="{{endereco_n}}" name="endereco_n" id="endereco_n" placeholder="193" />
+		</div>
+	</div>
+</div>
+	<!--end::Input-->
+	<div class="row">
+		<div class="col-xl-3">
+			<div class="form-group">
+				<label>Complemento</label>
+				<input required type="text" class="form-control form-control-solid form-control-lg" value="{{endereco_complemento}}" name="endereco_complemento" id="endereco_complemento" placeholder="" value="" />
+			</div>
+		</div>
+		<div class="col-xl-3">
+			<div class="form-group">
+				<label>Bairro</label>
+				<input required type="text" class="form-control form-control-solid form-control-lg" value="{{endereco_bairro}}" name="endereco_bairro" id="endereco_bairro" placeholder="Guaturinho" value="" />
+			</div>
+		</div>
+		<div class="col-xl-3">
+			<div class="form-group">
+				<label>Cidade</label>
+				<input required type="text" class="form-control form-control-solid form-control-lg" value="{{cidade}}" name="cidade" id="cidade" placeholder="" value="" />
+			</div>
+		</div>
+		<div class="col-xl-3">
+			<div class="form-group">
+				<label>Estado/UF</label>
+				<select class="form-control form-control-solid form-control-lg" name="uf" id="uf">
+					<option value="AC">Acre</option>
+					<option value="AL">Alagoas</option>
+					<option value="AP">Amapá</option>
+					<option value="AM">Amazonas</option>
+					<option value="BA">Bahia</option>
+					<option value="CE">Ceará</option>
+					<option value="DF">Distrito Federal</option>
+					<option value="ES">Espírito Santo</option>
+					<option value="GO">Goiás</option>
+					<option value="MA">Maranhão</option>
+					<option value="MT">Mato Grosso</option>
+					<option value="MS">Mato Grosso do Sul</option>
+					<option value="MG">Minas Gerais</option>
+					<option value="PA">Pará</option>
+					<option value="PB">Paraíba</option>
+					<option value="PR">Paraná</option>
+					<option value="PE">Pernambuco</option>
+					<option value="PI">Piauí</option>
+					<option value="RJ">Rio de Janeiro</option>
+					<option value="RN">Rio Grande do Norte</option>
+					<option value="RS">Rio Grande do Sul</option>
+					<option value="RO">Rondônia</option>
+					<option value="RR">Roraima</option>
+					<option value="SC">Santa Catarina</option>
+					<option value="SP">São Paulo</option>
+					<option value="SE">Sergipe</option>
+					<option value="TO">Tocantins</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xl-3">
+			<!--begin::Input-->
+			<div class="form-group">
+				<label>Nome do Responsável</label>
+				<input required type="text" oninput="this.value = this.value.toUpperCase()"  class="form-control  form-control-solid form-control-lg" value="{{nome_responsavel}}" name="nome_responsavel" id="nome_responsavel"  placeholder="" />
+			</div>
+			<!--end::Input-->
+		</div>
+		<div class="col-xl-3">
+			<!--begin::Input-->
+			<div class="form-group">
+				<label>Email</label>
+				<input required type="email" class="form-control form-control-solid form-control-lg" value="{{email}}" name="email" id="email"  placeholder="" value="" />
+			</div>
+			<!--end::Input-->
+		</div>
+		<div class="col-xl-3">
+			<!--begin::Input-->
+			<div class="form-group">
+				<label>Celular</label>
+				<input required type="text" class="form-control telefone form-control-solid form-control-lg" value="{{celular}}" name="celular" id="celular"  placeholder="" value="" />
+			</div>
+			<!--end::Input-->
+		</div>
+		<div class="col-xl-3">
+			<!--begin::Input-->
+			<div class="form-group">
+				<label>Telefone</label>
+				<input required type="text" class="form-control telefone form-control-solid form-control-lg" value="{{telefone}}"  name="telefone" id="telefone" placeholder="" value="" />
+			</div>
+			<!--end::Input-->
+		</div>
+	</div>
+

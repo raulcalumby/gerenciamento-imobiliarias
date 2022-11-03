@@ -1,0 +1,78 @@
+{% extends "base/base.html" %}
+
+{% block container %}
+<div class="container">
+    <div class="col-md-12 col-sm-12">
+        <div class="card card-custom">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-icon">
+                        <span class="svg-icon svg-icon-success svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Communication\Clipboard-list.svg-->
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <polygon points="0 0 24 0 24 24 0 24"/>
+                                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                    <path d="M11,14 L9,14 C8.44771525,14 8,13.5522847 8,13 C8,12.4477153 8.44771525,12 9,12 L11,12 L11,10 C11,9.44771525 11.4477153,9 12,9 C12.5522847,9 13,9.44771525 13,10 L13,12 L15,12 C15.5522847,12 16,12.4477153 16,13 C16,13.5522847 15.5522847,14 15,14 L13,14 L13,16 C13,16.5522847 12.5522847,17 12,17 C11.4477153,17 11,16.5522847 11,16 L11,14 Z" fill="#000000"/>
+                                </g>
+                            </svg><!--end::Svg Icon--></span>
+                    </span>
+                    <h3 class="card-label">Editar {{singular_name}} </h3>
+                </div>
+                <div class="card-toolbar">
+                    <!--begin::Button-->
+                    <a href="../../../../../{{controller|lower}}" class="mr-2 btn btn-success font-weight-bolder">
+                        <i class="far fa-list-alt"></i>Listar {{singular_name}} 
+                    </a>
+                </div>
+            </div>
+            <!-- FORM   EDIT INDICES -->
+            <form class="form" id="edit" method="post" action="../../../../../api/indices/{{indices_id}}/update">
+                <div class="card-body">
+                    <div class="row">                    
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Tipo:</label>
+                                <select type="text" class="form-control form-control-solid form-control-lg" name="tipo" id="tipo">
+                                    <option {{ tipo == "IPCA" ? 'selected="selected"': '' }} >IPCA</option>
+                                    <option {{ tipo == "IGPM" ? 'selected="selected"': '' }} >IGPM</option>
+                                    <option {{ tipo == "INPC" ? 'selected="selected"': '' }} >INPC</option>
+                                </select>
+                            </div>
+                        </div>  
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Alíquota:</label>
+                                <input  type="text" class="money form-control form-control-solid form-control-lg" name="aliquota" id="aliquota" value="{{aliquota}}"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Data:</label>
+                                <input required type="month" class="form-control form-control-solid form-control-lg" name="data" id="data" value="{{data}}"/>
+                            </div>
+                        </div>  
+
+                    </div>                 
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-12" style="text-align: center;">
+                            <button type="submit" class="btn btn-success mr-2">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block extra_js_config %}
+<script src="assets/js/pages/custom/indices/main.js"></script>
+<script src="assets/js/pages/custom/indices/edit.js"></script>
+<script src="assets/js/pages/custom/indices/upload_picture.js"></script>
+<script src="assets/js/pages/custom/maskmoney/jquery.maskMoney.min.js"></script>
+<script>$(".money").maskMoney({allowNegative: false, thousands:'.', decimal:',', affixesStay: false});</script>
+{% endblock %}

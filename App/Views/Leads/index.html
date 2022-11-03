@@ -1,0 +1,115 @@
+{% extends "base/base.html" %}
+
+{% block container %}
+
+<div class="container">
+    <div class="col-md-12 col-sm-12">
+        <div class="card card-custom">
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="card-icon">
+                        <span class="svg-icon menu-icon svg-icon-success"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/Communication/Mail-opened.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"/>
+                                <path d="M6,2 L18,2 C18.5522847,2 19,2.44771525 19,3 L19,12 C19,12.5522847 18.5522847,13 18,13 L6,13 C5.44771525,13 5,12.5522847 5,12 L5,3 C5,2.44771525 5.44771525,2 6,2 Z M7.5,5 C7.22385763,5 7,5.22385763 7,5.5 C7,5.77614237 7.22385763,6 7.5,6 L13.5,6 C13.7761424,6 14,5.77614237 14,5.5 C14,5.22385763 13.7761424,5 13.5,5 L7.5,5 Z M7.5,7 C7.22385763,7 7,7.22385763 7,7.5 C7,7.77614237 7.22385763,8 7.5,8 L10.5,8 C10.7761424,8 11,7.77614237 11,7.5 C11,7.22385763 10.7761424,7 10.5,7 L7.5,7 Z" fill="#000000" opacity="0.3"/>
+                                <path d="M3.79274528,6.57253826 L12,12.5 L20.2072547,6.57253826 C20.4311176,6.4108595 20.7436609,6.46126971 20.9053396,6.68513259 C20.9668779,6.77033951 21,6.87277228 21,6.97787787 L21,17 C21,18.1045695 20.1045695,19 19,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,6.97787787 C3,6.70173549 3.22385763,6.47787787 3.5,6.47787787 C3.60510559,6.47787787 3.70753836,6.51099993 3.79274528,6.57253826 Z" fill="#000000"/>
+                            </g>
+                        </svg><!--end::Svg Icon--></span>
+                    </span>
+                    <h3 class="card-label"> Gestão de {{singular_name}}</h3>
+                </div>
+                <div class="card-toolbar">
+                    <!--begin::Button-->
+                    <a onclick='addModal()' class="mr-2 btn btn-success font-weight-bolder">
+                    <i class="la la-plus"></i>Adicionar um Lead</a>
+                    <!--end::Button-->
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Busca Rapida:</label>
+                        <input type="text" id="search_name" name="search_name" class="serch_input form-control form-control-solid form-control-md" placeholder="Digite aqui ..." />
+                    </div>   
+                     
+                    <div class="col-md-3 d-flex">                                    
+                        <button id="search_dt" onclick="searchQueryDt()" class="form-control btn btn-success mt-auto"><i class="flaticon2-search-1"></i></button>
+                    </div>              
+                </div>
+                <!--begin: Datatable-->
+                <table class="table table-bordered table-hover table-checkable" id="kt_datatable" style="margin-top: 13px !important">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Telefone</th>    
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <!--end: Datatable-->
+            </div>
+        </div>
+        <!--end::Card-->
+    </div>
+</div>
+
+
+<!--FORM  -->
+<div class="modal fade bd-example-modal-lg" id="modalLeads" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title">
+                <h2>Criar/Editar Leads</h2>
+            </div>
+        </div>
+        
+        <form class="form" id="add" method="post" >
+      
+            <div class="modal-body">
+                <input type="hidden" name="leads_id" id="leads_id">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Nome:</label>
+                    <input required type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Email:</label>
+                    <input type="text" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Telefone:</label>
+                    <input type="text" class="form-control" id="phone" name="phone">
+                </div>             
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Detalhes:</label>
+                  <textarea required class="form-control" id="message_text" name="message_text" rows="10" ></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-md">Confirmar</button>
+                <a class="btn btn-danger btn-md"  data-dismiss="modal" >Cancelar</a>
+            </div>   
+        </form>
+      </div>
+    </div>
+</div>
+{% endblock %}
+{% block link_stylesheet %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css">
+{% endblock %}
+{% block extra_js_config %}
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="assets/plugins/custom/datatables/datatables.bundle.js?v=7.0.5"></script>
+    <!--end::Page Vendors-->
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
+    <!--end::Page Scripts-->
+    <script src="assets/js/pages/custom/leads/main.js"></script>
+    <script src="assets/js/pages/custom/leads/list.js"></script>
+    <script src="assets/js/pages/custom/leads/add.js"></script>
+{% endblock %}
