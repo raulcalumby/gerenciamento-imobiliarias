@@ -1,4 +1,4 @@
-<h1> Projeto para Administração de imobiliária </h1> 
+<h1> Projeto para Administração de imobiliárias </h1> 
 
 <p>A idéia do projeto é criar um sistema onde podetemos ter cadastros como Leads, Imóveis, Proprietários e Locatários, com acesso rapido as informações desses cadastros e filtragens, com isso</p>
 
